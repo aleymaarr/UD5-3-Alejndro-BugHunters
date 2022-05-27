@@ -2,15 +2,16 @@ package com.digitalcastaway.biblioteca;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 
 public class Biblioteca {
     private String name;
-    private ArrayList<Integer> catalogoLibros;
+    private ArrayList<String> catalogoLibros;
 
     public Biblioteca(String name) {
         this.name = name;
-        this.catalogoLibros = new ArrayList<String>(Arrays.stream(Catalogo.libros).toList());
+        this.catalogoLibros = new ArrayList<String>((Collection<? extends String>) Arrays.stream(Catalogo.libros).iterator());
     }
 
     public void showCatalog() {
@@ -21,13 +22,14 @@ public class Biblioteca {
 
         int contador = 0;
 
-        while(it.next()) {
+        while(it.hasNext()) {
             System.out.println(contador + " --> " + it.hasNext());
             contador--;
         }
     }
 
     public String prestarLibro(int posicion) {
+
         return catalogoLibros.remove(posicion);
     }
 
